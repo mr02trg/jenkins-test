@@ -1,20 +1,26 @@
 pipeline {
-    agent none
+    agent any
     stages {
         stage('performance testing') {
             agent {
                 docker {
                     image 'justb4/jmeter:latest'
-                    args '-v ${PWD}/jmeter:${PWD} -w ${PWD}'
+                    args "--entrypoint=''"
                 }
             }
             environment {
                 HOST= "smh.com.au"
             }
             steps {
-                sh 'jmeter -n -t TestPlan.jmx -JHOST="${HOST}" -l TestResult-${BUILD_NUMBER}.jlt'
+                sh "ls -la"
+                sh "jmeter --version"
+                sh 'jmeter -n -t jmeter/TestPlan.jmx -JHOST="${HOST}" -l jmeter/TestResult-${BUILD_NUMBER}.jlt'
             }
         }
     }
+    post {
+        always {
+            archiveArtifacts artifacts: 'jmeter/TestResult-${BUILD_NUMBER}.jlt', fingerprint: true
+        }
+    }
 }
-
