@@ -14,13 +14,13 @@ pipeline {
             steps {
                 sh "ls -la"
                 sh "jmeter --version"
-                sh 'jmeter -n -t jmeter/TestPlan.jmx -JHOST="${HOST}" -l jmeter/TestResult-${BUILD_NUMBER}.jlt'
+                sh 'jmeter -n -t jmeter-resources/TestPlan.jmx -JHOST="${HOST}" -l jmeter-resources/TestResult-${BUILD_NUMBER}.jlt'
             }
         }
     }
     post {
         always {
-            archiveArtifacts artifacts: "jmeter/TestResult-${BUILD_NUMBER}.jlt", fingerprint: true
+            archiveArtifacts artifacts: "jmeter-resources/TestResult-${BUILD_NUMBER}.jlt", fingerprint: true
         }
     }
 }
