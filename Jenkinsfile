@@ -20,7 +20,7 @@ pipeline {
     }
     post {
         always {
-            archiveArtifacts artifacts: 'jmeter/TestResult-${BUILD_NUMBER}.jlt', fingerprint: true
+            archiveArtifacts artifacts: "jmeter/TestResult-${BUILD_NUMBER}.jlt", fingerprint: true
         }
     }
 }
