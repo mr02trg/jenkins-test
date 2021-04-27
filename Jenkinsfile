@@ -1,12 +1,20 @@
 pipeline {
-    agent {
-        docker { image 'node:14-alpine' }
-    }
+    agent none
     stages {
-        stage('Test') {
+        stage('performance testing') {
+            agent {
+                docker {
+                    image 'justb4/jmeter:latest'
+                    args '-v ${PWD}/jmeter:${PWD} -w ${PWD}'
+                }
+            }
+            environment {
+                HOST= "smh.com.au"
+            }
             steps {
-                sh 'node --version'
+                sh 'jmeter -n -t TestPlan.jmx -JHOST="${HOST}" -l TestResult-${BUILD_NUMBER}.jlt'
             }
         }
     }
 }
+
