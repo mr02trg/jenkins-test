@@ -1,5 +1,9 @@
 pipeline {
     agent any
+    options {
+        // disable declarative checkout
+        skipDefaultCheckout()
+    }
     stages {
         stage('begin') {
             steps{
