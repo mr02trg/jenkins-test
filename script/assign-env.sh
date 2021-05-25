@@ -2,4 +2,5 @@
 
 echo "Assigning env variables"
 
-env.DEPLOY_STATUS="DEPLOYED"
+DEPLOY_STATUS="DEPLOYED"
+exit 0
