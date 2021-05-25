@@ -11,8 +11,8 @@ pipeline {
       steps {
         sh('./script/assign-env.sh')
         script {
-          if (fileExists(${env.DEPLOY_STATUS_FP})) {
-            env.deploy_status = readFile(${env.DEPLOY_STATUS_FP}).trim()
+          if (fileExists('deploy_status.txt')) {
+            env.deploy_status = readFile('deploy_status.txt').trim()
           } else {
             env.deploy_status = "NO_DEPLOY"
           }
