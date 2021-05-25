@@ -4,12 +4,13 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-        sh ("./script/assign-env.sh")
+        tmp_param = sh (script: "./script/assign-env.sh", returnStdout: true).trim()
+        env.custom_var = tmp_param
       }
     }
     stage('Test') {
       steps {
-        echo "${DEPLOY_STATUS}"
+        echo "${env.custom_var}"
       }
     }
   }
