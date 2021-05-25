@@ -2,4 +2,4 @@
 
 echo "TESTING...."
 echo "Hello world"
-echo "DEPLOY_SUCCESS" > 'deploy_status.txt'
+# echo "DEPLOY_SUCCESS" > 'deploy_status.txt'
