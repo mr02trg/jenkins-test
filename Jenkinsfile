@@ -9,8 +9,8 @@ pipeline {
     }
     stage('Test') {
       steps {
-        sh('echo ${?}')
-        sh('echo ${DEPLOY_STATUS}')
+        echo "${?}"
+        echo "${DEPLOY_STATUS}"
       }
     }
   }
