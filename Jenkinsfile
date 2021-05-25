@@ -4,8 +4,9 @@ pipeline {
   stages {
     stage('Build') {
       steps {
+        sh('./script/assign-env.sh')
         script {
-          tmp_param = sh(script: "./script/assign-env.sh", returnStdout: true).trim()
+          tmp_param = readFile('deploy_status.txt').trim()
           env.custom_var = tmp_param
         }
       }
@@ -16,4 +17,9 @@ pipeline {
       }
     }
   }
+  post {
+		cleanup {
+			cleanWs()
+		}
+	}
 }
