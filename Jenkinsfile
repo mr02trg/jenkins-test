@@ -9,7 +9,6 @@ pipeline {
     }
     stage('Test') {
       steps {
-        echo "$?"
         echo "${DEPLOY_STATUS}"
       }
     }
