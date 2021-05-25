@@ -1,12 +1,21 @@
 pipeline {
   agent any
 
+  environment {
+		DEPLOY_STATUS_FP = 'deploy_status.txt'
+		PATH = "${env.WORKSPACE}/node_modules/.bin:${env.PATH}"
+	}
+
   stages {
     stage('Build') {
       steps {
         sh('./script/assign-env.sh')
         script {
-          env.deploy_status = readFile('deploy_status.txt').trim()
+          if (fileExists(${env.DEPLOY_STATUS_FP})) {
+            env.deploy_status = readFile(${env.DEPLOY_STATUS_FP}).trim()
+          } else {
+            env.deploy_status = "NO_DEPLOY"
+          }
         }
       }
     }
