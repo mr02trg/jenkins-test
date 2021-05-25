@@ -13,7 +13,7 @@ pipeline {
     }
     stage('DAST') {
       environment {
-        SFDX_VAR = credentials("SF_DEPLOY_URL")
+        SFDX_VAR = "Hello world 123"
       }
 			steps {
         script {
