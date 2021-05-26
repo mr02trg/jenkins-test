@@ -13,8 +13,6 @@ pipeline {
         script {
           if (fileExists(env.DEPLOY_STATUS_FILE)) {
             env.DEPLOY_STATUS = readFile(env.DEPLOY_STATUS_FILE).trim()
-          } else {
-            env.DEPLOY_STATUS = "NO_DEPLOY"
           }
         }
       }
